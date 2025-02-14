@@ -1,10 +1,5 @@
 streamlit
 google-generativeai
-torch
-torchaudio
-torchvision
-transformers
 openai-whisper
-ffmpeg-python
 python-dotenv
-plotly
+ffmpeg-python
