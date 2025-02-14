@@ -62,7 +62,16 @@ Python: Backend logic and integration.<br>
 ## Contributing 🤝
 Contributions are welcome! If you'd like to contribute, please follow these steps:
 Fork the repository.
-Create a new branch (git checkout -b feature/your-feature).
-Commit your changes (git commit -m 'Add some feature').
-Push to the branch (git push origin feature/your-feature).
+Create a new branch 
+```sh 
+git checkout -b feature/your-feature
+```
+Commit your changes 
+```sh
+git commit -m 'Add some feature
+```
+Push to the branch 
+```sh
+git push origin feature/your-feature
+```
 Open a pull request.
