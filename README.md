@@ -24,13 +24,6 @@ A hands-free cooking assistant that generates recipes based on spoken or uploade
 
 ---
 
-## Demo 🎥
-
-![Demo](demo.gif)  
-*Note: Replace this with an actual GIF or screenshot of your app.*
-
----
-
 ## Installation 🚀
 
 1. Clone the repository:
