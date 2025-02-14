@@ -2,4 +2,3 @@ streamlit
 google-generativeai
 openai-whisper
 python-dotenv
-ffmpeg-python
