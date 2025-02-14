@@ -1,7 +1,10 @@
-streamlit==1.32.0
-google-generativeai==0.3.2
-openai-whisper==20231117
-python-dotenv==1.0.0
-torch==2.1.0
-torchaudio==2.1.0
-ffmpeg-python==0.2.0
+streamlit
+google-generativeai
+torch
+torchaudio
+torchvision
+transformers
+openai-whisper
+ffmpeg-python
+python-dotenv
+plotly
