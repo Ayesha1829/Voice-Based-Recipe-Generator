@@ -54,10 +54,10 @@ streamlit run app.py
 ```
 
 ## Tech Stack
-Whisper: OpenAI's speech-to-text model for transcribing audio.
-Gemini: Google's language model for generating recipes.
-Streamlit: For building the web app UI.
-Python: Backend logic and integration.
+Whisper: OpenAI's speech-to-text model for transcribing audio.<br>
+Gemini: Google's language model for generating recipes.<br>
+Streamlit: For building the web app UI.<br>
+Python: Backend logic and integration.<br>
 
 ## Contributing 🤝
 Contributions are welcome! If you'd like to contribute, please follow these steps:
