@@ -14,7 +14,7 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel('gemini-pro')
 
 # Load Whisper
-whisper_model = whisper.load_model("base")
+whisper_model = whisper.load_model("small")
 
 # Load or initialize saved recipes
 def load_saved_recipes():
