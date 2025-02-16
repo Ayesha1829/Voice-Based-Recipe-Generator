@@ -30,8 +30,8 @@ def save_recipe(recipe):
         json.dump(saved_recipes, file)
 
 # Streamlit UI
-st.title("Voice-Based Recipe Generator 🍳")
-st.subheader("Speak or upload your ingredients, and get a recipe!")
+st.title("Voice & Text-Based Recipe Generator 🍳")
+st.subheader("Enter or speak your ingredients, and get a recipe!")
 
 # Sidebar for dietary preferences
 st.sidebar.header("Dietary Preferences")
@@ -40,55 +40,62 @@ dietary_preference = st.sidebar.selectbox(
     ["None", "Vegetarian", "Vegan", "Gluten-Free", "Low-Carb", "Keto"]
 )
 
-# User input: Upload audio or speak
-st.markdown("### 🎙️ Speak or Upload Ingredients")
-audio_file = st.file_uploader("Upload audio (MP3/WAV) or speak your ingredients", type=["wav", "mp3"])
+# User input: Text or Audio
+st.markdown("### 📝 Enter Ingredients (Text) or Upload Audio 🎙️")
 
-# Process audio
+# Text input
+text_ingredients = st.text_area("Enter ingredients manually (comma-separated):")
+
+# Audio input
+audio_file = st.file_uploader("Upload audio (MP3/WAV)", type=["wav", "mp3"])
+
+transcribed_text = ""
+
+# Process audio if uploaded
 if audio_file:
-    # Save uploaded audio to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
         tmp_file.write(audio_file.read())
         tmp_file_path = tmp_file.name
 
     # Transcribe with Whisper
     with st.spinner("Transcribing your ingredients..."):
-        transcription = whisper_model.transcribe(tmp_file_path)["text"]
-        
-        # Display transcription
-        st.write("---")
+        transcribed_text = whisper_model.transcribe(tmp_file_path)["text"]
         st.markdown("### 📝 Transcribed Ingredients")
-        st.write(transcription)
+        st.write(transcribed_text)
 
-        # Generate recipe with Gemini
-        with st.spinner("Generating recipe..."):
-            prompt = f"""
-            Act as a professional chef. Generate a detailed recipe based on the following ingredients:
+# Use text input if provided, otherwise use transcribed text
+final_ingredients = text_ingredients if text_ingredients else transcribed_text
 
-            Ingredients: {transcription}
+# Generate recipe if ingredients are available
+if final_ingredients:
+    with st.spinner("Generating recipe..."):
+        prompt = f"""
+        Act as a professional chef. Generate a detailed recipe based on the following ingredients:
 
-            Dietary Preference: {dietary_preference if dietary_preference != "None" else "None"}
+        Ingredients: {final_ingredients}
 
-            Provide the recipe in the following format:
-            1. Recipe Name
-            2. Ingredients (with quantities)
-            3. Step-by-Step Instructions
-            4. Serving Suggestions
-            5. Tips or Variations
-            """
-            
-            response = model.generate_content(prompt)
-            recipe = response.text
-            
-            # Display recipe
-            st.write("---")
-            st.markdown("### 🍴 Generated Recipe")
-            st.markdown(recipe)
+        Dietary Preference: {dietary_preference if dietary_preference != "None" else "None"}
 
-            # Save recipe option
-            if st.button("💾 Save Recipe"):
-                save_recipe(recipe)
-                st.success("Recipe saved successfully!")
+        Provide the recipe in the following format:
+        1. Recipe Name
+        2. Ingredients (with quantities)
+        3. Step-by-Step Instructions
+        4. Serving Suggestions
+        5. Tips or Variations
+        """
+        
+        response = model.generate_content(prompt)
+        recipe = response.text
+
+        # Display recipe
+        st.write("---")
+        st.markdown("### 🍴 Generated Recipe")
+        st.markdown(recipe)
+
+        # Save recipe option
+        if st.button("💾 Save Recipe"):
+            save_recipe(recipe)
+            st.success("Recipe saved successfully!")
 
 # View saved recipes
 st.write("---")
