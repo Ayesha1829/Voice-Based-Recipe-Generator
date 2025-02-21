@@ -2,9 +2,10 @@ streamlit
 google-generativeai
 openai-whisper
 python-dotenv
-whisper
 torch
 torchaudio
 numpy
 soundfile
 openai
+streamlit-audio-recorder
+Pillow
