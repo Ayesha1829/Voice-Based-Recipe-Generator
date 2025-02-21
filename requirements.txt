@@ -7,5 +7,5 @@ torchaudio
 numpy
 soundfile
 openai
-streamlit-audio-recorder
+streamlit-mic-recorder
 Pillow
